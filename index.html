@@ -1,40 +1,342 @@
-<!-- <script>
-  window.location.href="https://www.vingsmono.top"
-</script>
- -->
-
- <!-- deb7e01d346848 -->
-
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--     <title>IP 跳转</title> -->
-    <script>
-        // 获取用户的IP地址信息
-        fetch('https://ipinfo.io/json?token=deb7e01d346848')  // 请替换 YOUR_TOKEN 为你自己的 API token
-        .then(response => response.json())
-        .then(data => {
-            // 获取用户的国家信息
-            const country = data.country;
+    <title>VINGS-MONO Project</title>
+    <style>
+        @font-face {
+            font-family: 'Book Antiqua';
+            src: url('./fonts/BookAntiqua-Regular.ttf') format('truetype');
+        }
 
-            // 根据国家判断跳转URL
-            if (country === 'CN') {
-                // 如果是中国IP，跳转到网址A
-                window.location.href = "https://www.vingsmono.top";  // 请替换成网址A
-            } else {
-                // 如果是非中国IP，跳转到网址B
-                window.location.href = "https://vings-mono.vercel.app";  // 请替换成网址B
-            }
-        })
-        .catch(error => {
-            // 如果获取IP信息失败，默认跳转到网址B
-            window.location.href = "https://vings-mono.vercel.app";  // 请替换成网址B
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Book Antiqua', serif;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        .header {
+            text-align: center;
+            padding: 2rem;
+            background-color: #000000;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1rem;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .top-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            text-decoration: none;
+        }
+
+        .link-icon {
+            font-size: 1.5rem;
+        }
+
+        .soon {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .main-nav {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background-color: #1a1a1a;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+        }
+
+        .nav-item {
+            padding: 1rem;
+            color: white;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background-color: #333;
+        }
+
+        .sub-nav {
+            display: none;
+            justify-content: center;
+            gap: 2rem;
+            padding: 1rem;
+            background-color: #1a1a1a;
+            border-bottom: 1px solid #333;
+        }
+
+        .sub-nav.active {
+            display: flex;
+        }
+
+        .sub-nav-item {
+            padding: 0.5rem 1.5rem;
+            color: white;
+            background: none;
+            border: 1px solid white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .sub-nav-item:hover,
+        .sub-nav-item.active {
+            background-color: #333;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .video-section {
+            display: none;
+        }
+
+        .video-section.active {
+            display: block;
+        }
+
+        .video-container {
+            display: none;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .video-container.active {
+            display: block;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <img src="images/logo.png" alt="VINGS-MONO Logo" width="800" height="440">
+        <h1 class="title">Visual-Inertial Gaussian Splatting</h1>
+        <h2 class="subtitle">Monocular SLAM in Large Scenes</h2>
+        
+        <div class="top-links">
+            <a href="#" class="link-item">
+                <span class="link-icon">📄</span>
+                <span>Paper</span>
+                <span class="soon">(soon)</span>
+            </a>
+            <a href="#" class="link-item">
+                <span class="link-icon">💻</span>
+                <span>Code</span>
+                <span class="soon">(soon)</span>
+            </a>
+            <a href="https://www.youtube.com/watch?v=vniTZcNj_tA&t=163s" class="link-item">
+                <span class="link-icon">🎥</span>
+                <span>Video</span>
+            </a>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <button class="nav-item active">Introduction</button>
+        <button class="nav-item">VO Results</button>
+        <button class="nav-item">VIO Results</button>
+        <button class="nav-item">⭐RealWorld&MobileApp</button>
+    </nav>
+
+    <nav id="introNav" class="sub-nav active">
+        <button class="sub-nav-item active" data-video="pipeline">Pipeline</button>
+        <button class="sub-nav-item" data-video="nvs-loop">NVS Loop Closure</button>
+    </nav>
+
+    <nav id="voNav" class="sub-nav">
+        <button class="sub-nav-item" data-video="indoor">Indoor</button>
+        <button class="sub-nav-item" data-video="drone">Drone</button>
+        <button class="sub-nav-item" data-video="waymo">Waymo</button>
+        <button class="sub-nav-item" data-video="smallcity">SmallCity</button>
+    </nav>
+
+    <nav id="vioNav" class="sub-nav">
+        <button class="sub-nav-item" data-video="kitti">KITTI</button>
+        <button class="sub-nav-item" data-video="kitti360">KITTI360</button>
+    </nav>
+
+    <nav id="realworldNav" class="sub-nav">
+        <button class="sub-nav-item" data-video="app-indoor">App Indoor</button>
+        <button class="sub-nav-item" data-video="app-outdoor">App Outdoor</button>
+        <button class="sub-nav-item" data-video="large-campus">Large Campus</button>
+    </nav>
+
+    <main class="content">
+        <!-- Introduction videos -->
+        <section id="introVideos" class="video-section active">
+            <div id="pipeline" class="video-container active">
+                <!-- <video autoplay loop muted playsinline>
+                    <source src="videos/pipeline.mp4" type="video/mp4">
+                </video> -->
+                    VINGS-Mono is a monocular (inertial) Gaussian Splatting (GS) SLAM framework designed for large scenes. The framework comprises four main components: VIO Front End, 2D Gaussian Map, NVS Loop Closure, and Dynamic Eraser. In the VIO Front End, RGB frames are processed through dense bundle adjustment and uncertainty estimation to extract scene geometry and pose information. Based on this output, the mapping module incrementally constructs and maintains a 2D Gaussian map. Key components of the 2D Gaussian Map include a Sample- based Rasterizer, Score Manager, and Pose Refinement, which collectively improve mapping speed and localization accuracy. This allows the SLAM system to handle large-scale urban envi- ronments with Gaussian representations of up to 40–50 million ellipsoids. To ensure global consistency in large-scale scenes, we design a Loop Closure module, which innovatively leverages the Novel View Synthesis (NVS) capabilities of Gaussian Splatting for loop closure detection and correction of the Gaussian map. Additionally, we propose a Dynamic Eraser to address the inevitable presence of dynamic objects in real-world outdoor scenes. Extensive evaluations in indoor and outdoor environments demonstrate that our approach achieves localization performance on par with Visual-Inertial Odometry while surpassing recent GS/NeRF SLAM methods. It also significantly outperforms all existing methods in terms of mapping and rendering quality. Furthermore, we developed a mobile app and verified that our framework can generate high-quality Gaussian maps in real time using only a smartphone camera and a low-frequency IMU sensor. To the best of our knowledge, VINGS-Mono is the first monocular Gaussian SLAM method capable of operating in outdoor environments and supporting kilometer-scale large scenes.
+                <img src="images/pipeline.png" alt="VINGS-MONO Logo" width="600" height="330" style="display: block; margin: 0 auto;">
+            </div>
+            <div id="nvs-loop" class="video-container">
+                    We propose a novel Gaussian Splatting based loop detection and correction method. Instead of using the Bag of Words (BoW) approach for loop detection, we leverage the novel view synthesis capabilities of gaussian
+splatting from new viewpoints to determine if a loop has been detected. Following this, we use graph optimization to correct poses and use gaussians' frame index to correct the 2D Gaussian Map.
+
+                <video autoplay loop muted playsinline>
+                    <source src="videos/nvs-loop.mp4" type="video/mp4">
+                </video>
+            </div>
+        </section>
+
+        <!-- VO Results videos -->
+        <section id="voVideos" class="video-section">
+            <div id="indoor" class="video-container">
+                <video autoplay loop muted playsinline>
+                    <source src="videos/indoor.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div id="drone" class="video-container">
+                <video autoplay loop muted playsinline>
+                    <source src="videos/drone.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div id="waymo" class="video-container">
+                <video autoplay loop muted playsinline>
+                    <source src="videos/waymo.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div id="smallcity" class="video-container">
+                <video autoplay loop muted playsinline>
+                    <source src="videos/smallcity.mp4" type="video/mp4">
+                </video>
+            </div>
+        </section>
+
+        <!-- VIO Results videos -->
+        <section id="vioVideos" class="video-section">
+            <div id="kitti" class="video-container">
+                <video autoplay loop muted playsinline>
+                    <source src="videos/kitti.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div id="kitti360" class="video-container">
+                <video autoplay loop muted playsinline>
+                    <source src="videos/kitti360.mp4" type="video/mp4">
+                </video>
+            </div>
+        </section>
+
+        <!-- RealWorld&MobileApp videos -->
+        <section id="realworldVideos" class="video-section">
+            <div id="app-indoor" class="video-container">
+                <video autoplay loop muted playsinline>
+                    <source src="videos/app-indoor.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div id="app-outdoor" class="video-container">
+                <video autoplay loop muted playsinline>
+                    <source src="videos/app-outdoor.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div id="large-campus" class="video-container">
+                <video autoplay loop muted playsinline>
+                    <source src="videos/large-campus.mp4" type="video/mp4">
+                </video>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const navMapping = {
+            'Introduction': { nav: 'introNav', videos: 'introVideos' },
+            'VO Results': { nav: 'voNav', videos: 'voVideos' },
+            'VIO Results': { nav: 'vioNav', videos: 'vioVideos' },
+            '⭐RealWorld&MobileApp': { nav: 'realworldNav', videos: 'realworldVideos' }
+        };
+
+        // 主导航点击处理
+        document.querySelectorAll('.main-nav .nav-item').forEach(button => {
+            button.addEventListener('click', () => {
+                // 移除所有active类
+                document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.sub-nav').forEach(nav => nav.classList.remove('active'));
+                document.querySelectorAll('.video-section').forEach(section => section.classList.remove('active'));
+                
+                // 添加active类到当前按钮
+                button.classList.add('active');
+                
+                // 显示对应的二级导航和视频区域
+                const mapping = navMapping[button.textContent];
+                if (mapping) {
+                    const subNav = document.getElementById(mapping.nav);
+                    const videoSection = document.getElementById(mapping.videos);
+                    
+                    subNav.classList.add('active');
+                    videoSection.classList.add('active');
+                    
+                    // 激活第一个子菜单项及其视频
+                    const firstSubItem = subNav.querySelector('.sub-nav-item');
+                    if (firstSubItem) {
+                        document.querySelectorAll('.sub-nav-item').forEach(item => item.classList.remove('active'));
+                        firstSubItem.classList.add('active');
+                        
+                        const videoId = firstSubItem.dataset.video;
+                        document.querySelectorAll('.video-container').forEach(container => container.classList.remove('active'));
+                        document.getElementById(videoId).classList.add('active');
+                    }
+                }
+            });
+        });
+
+        // 二级导航点击处理
+        document.querySelectorAll('.sub-nav .sub-nav-item').forEach(button => {
+            button.addEventListener('click', () => {
+                // 移除当前二级导航中所有按钮的active类
+                const currentSubNav = button.closest('.sub-nav');
+                currentSubNav.querySelectorAll('.sub-nav-item').forEach(b => b.classList.remove('active'));
+                
+                // 添加active类到当前按钮
+                button.classList.add('active');
+                
+                // 切换视频显示
+                const videoId = button.dataset.video;
+                document.querySelectorAll('.video-container').forEach(container => container.classList.remove('active'));
+                document.getElementById(videoId).classList.add('active');
+            });
         });
     </script>
-</head>
-<!-- <body>
-    <h1>正在检测IP信息...</h1>
-</body> -->
+</body>
 </html>
