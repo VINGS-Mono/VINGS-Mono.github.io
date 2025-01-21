@@ -1,8 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="5; url=www.vingsmono.top">
-</head>
-</html>
+<!DOCTYPE html> 
+  <html lang="zh"> 
+  <html lang="en"> 
+  <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<script> 
+  // 获取用户的IP地址信息 
+  fetch('https://ipinfo.io/json?token=deb7e01d346848') // 请替换 YOUR_TOKEN 为你自己的 API token 
+  .then(response => response.json()) 
+  .then(data => { 
+  // 获取用户的国家信息 
+  const country = data.country; 
+  
+   // 根据国家判断跳转URL 
+  if (country === 'CN') { 
+  // 如果是中国IP，跳转到网址A 
+  window.location.href = "https://www.vingsmono.top"; // 请替换成网址A 
+  } else { 
+  // 如果是非中国IP，跳转到网址B 
+  window.location.href = "https://www.vingsmono.top"; // 请替换成网址B 
+  } 
+  }) 
+  .catch(error => { 
+  // 如果获取IP信息失败，默认跳转到网址B 
+  window.location.href = "https://vings-mono.vercel.app"; // 请替换成网址B 
+}); 
+  </script> 
+  </head> 
+  <!-- <body> 
+  <h1>正在检测IP信息...</h1> 
+  </body> --> 
+  </html> 
+  </body> 
+  </html> 
