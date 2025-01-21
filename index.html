@@ -300,10 +300,10 @@
                 </div>
             </div>
             <div id="nvs-loop" class="video-container">
-                <video autoplay loop muted playsinline disablePictureInPicture controlsList="nodownload noplaybackrate">
-                    We propose a novel Gaussian Splatting based loop detection and correction method. Instead of using the Bag of Words (BoW) approach for loop detection, we leverage the novel view synthesis capabilities of gaussian
+                We propose a novel Gaussian Splatting based loop detection and correction method. Instead of using the Bag of Words (BoW) approach for loop detection, we leverage the novel view synthesis capabilities of gaussian
 splatting from new viewpoints to determine if a loop has been detected. Following this, we use graph optimization to correct poses and use gaussians' frame index to correct the 2D Gaussian Map.
                     <img src="images/loopclosure.png" alt="loopclosure" style="max-width: 100%; height: auto;">
+                <video autoplay loop muted playsinline disablePictureInPicture controlsList="nodownload noplaybackrate">
                     <source src="videos/nvs-loop.mp4" type="video/mp4">
                 </video>
             </div>
@@ -312,21 +312,25 @@ splatting from new viewpoints to determine if a loop has been detected. Followin
         <section id="voVideos" class="video-section">
             <div id="indoor" class="video-container">
                 <video autoplay loop muted playsinline>
+                    Our method does not require depth priors and reconstructs maps with higher visual fidelity and fewer artifacts within a few minutes of training for an indoor scene. It preserves fine textures and effectively captures structural details.
                     <source src="videos/indoor.mp4" type="video/mp4">
                 </video>
             </div>
             <div id="drone" class="video-container">
                 <video autoplay loop muted playsinline>
+                    Our method demonstrates unparalleled robustness in outdoor mapping, achieving precise geometric estimation and reconstruction even in sparse and complex structures.
                     <source src="videos/drone.mp4" type="video/mp4">
                 </video>
             </div>
             <div id="waymo" class="video-container">
                 <video autoplay loop muted playsinline>
+                    Compared to indoor environments, outdoor scenes pose greater challenges due to significantly longer trajectory lengths (ranging from hundreds to thousands of meters) and larger frame intervals. These factors heavily impact the rendering quality and map storage requirements of baseline methods.
                     <source src="videos/waymo.mp4" type="video/mp4">
                 </video>
             </div>
             <div id="smallcity" class="video-container">
                 <video autoplay loop muted playsinline>
+                    On handheld datasets such as Hierarchical, characterized by random motion trajectories and limited capture ranges, our method achieves high-precision modeling of building edges and surface details.
                     <source src="videos/smallcity.mp4" type="video/mp4">
                 </video>
             </div>
@@ -335,11 +339,13 @@ splatting from new viewpoints to determine if a loop has been detected. Followin
         <section id="vioVideos" class="video-section">
             <div id="kitti" class="video-container">
                 <video autoplay loop muted playsinline>
+                    For the online reconstruction demonstration of large outdoor scenes, we selected KITTI odom08, which has a trajectory length of 3.7 km. The complete Gaussian map consists of 32million Gaussian ellipsoids.
                     <source src="videos/kitti.mp4" type="video/mp4">
                 </video>
             </div>
             <div id="kitti360" class="video-container">
                 <video autoplay loop muted playsinline>
+                    The trajectory length of KITTI360's scene is 8.05 km, and the entire Gaussian map contains 51.73 million ellipsoids. We recorded the number of Gaussians throughout the training process and zoomed in on different parts of the map for clearer visualization.
                     <source src="videos/kitti360.mp4" type="video/mp4">
                 </video>
             </div>
@@ -348,16 +354,19 @@ splatting from new viewpoints to determine if a loop has been detected. Followin
         <section id="realworldVideos" class="video-section">
             <div id="app-indoor" class="video-container">
                 <video autoplay loop muted playsinline>
+                    We ran VINGS-Mono in a mobile phone setup. We developed an app using the Flutter framework, which can be deployed on iOS, Android, and Windows platforms.
                     <source src="videos/app-indoor.mp4" type="video/mp4">
                 </video>
             </div>
             <div id="app-outdoor" class="video-container">
                 <video autoplay loop muted playsinline>
+                    Additionally, in outdoor scenes under low-light conditions, our method achieves high-quality reconstruction of highly exposed areas, such as illuminated signboards.
                     <source src="videos/app-outdoor.mp4" type="video/mp4">
                 </video>
             </div>
             <div id="large-campus" class="video-container">
                 <video autoplay loop muted playsinline>
+                    To further test the stability and robustness of our method, we collected a large outdoor dataset. This dataset covers the entire Campus and was recorded using an iPhone device. It spans approximately 1.02 km in length and 0.4 km in width.
                     <source src="videos/large-campus.mp4" type="video/mp4">
                 </video>
             </div>
